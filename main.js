@@ -5,10 +5,11 @@ var config = {
   trainSetSize: 100,
   testSetSize: 20,
   dimension: 4,
-  x: 100,
-  acceptableError: .1,
+  x: 41,
+  acceptableError: .05,
   perceptronLearningRate: 1
 }
+
 
 // init
 var rand = new Randomizer(config.dimension, config.x);
@@ -24,6 +25,7 @@ for(let i = 0; i < config.trainSetSize; i++)
 for(let i = 0; i < config.testSetSize; i++)
   set.test.push(rand.getVector());
 
+
 // methods
 function train() {
   for(let i = 0; i < config.trainSetSize; i++) {
@@ -35,10 +37,11 @@ function check() {
   var err = 0;
   for(let i = 0; i < config.testSetSize; i++){
     if(perceptron.activated(set.test[i]) != set.test[i][config.dimension])
+      // console.log('For ' + set.test[i] + ' got: ' + !set.test[i][config.dimension]);
       err++;
   }
-  console.log(err / 20);
-  return err / 20;
+  console.log(err / config.testSetSize);
+  return err / config.testSetSize;
 }
 
 train();

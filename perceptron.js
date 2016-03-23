@@ -37,9 +37,9 @@ class Perceptron {
       }
 
       if(vector[this.dimension])
-        this.threshold += this.learningRate;
-      else
         this.threshold -= this.learningRate;
+      else
+        this.threshold += this.learningRate;
     }
   }
 }
