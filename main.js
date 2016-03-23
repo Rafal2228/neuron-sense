@@ -1,13 +1,14 @@
+var util = require('util');
 var Randomizer = require('./randomizer');
 var Perceptron = require('./perceptron');
 
 var config = {
-  trainSetSize: 100,
+  trainSetSize: 500,
   testSetSize: 20,
   dimension: 4,
   x: 41,
   acceptableError: .05,
-  perceptronLearningRate: 1
+  perceptronLearningRate: .1
 }
 
 
@@ -47,3 +48,40 @@ function check() {
 train();
 while(check() > config.acceptableError)
   train();
+
+// Manual check
+console.log('Done');
+console.log('Want to check manually? Y/n');
+process.stdin.setEncoding('utf8');
+
+var input = false;
+var vector = [];
+var n = 0;
+var num = 0;
+var sum = 0;
+
+process.stdin.on('readable', () => {
+  var text = process.stdin.read();
+  if (text !== null) {
+    if(!input) {
+        if(text == 'n\n') process.exit();
+        else input = true;
+
+    } else {
+      num = parseFloat(text);
+      vector.push(num);
+      sum += num;
+      if(vector.length == config.dimension) {
+        let t = perceptron.activated(vector);
+        if(t != (sum > config.x)) {
+          process.stdout.write('We failed: Expected ' + sum + (t ? ' > ' : ' <= ') + config.x + '\n');
+          process.exit();
+        } else {
+          process.stdout.write('Success: ' + sum + (t ? ' > ' : ' <= ') + config.x + '\n');
+          process.exit();
+        }
+      }
+    }
+    process.stdout.write(vector.length + ' num: ');
+  }
+});

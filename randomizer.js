@@ -1,9 +1,9 @@
 const NUM_LIMIT = 1000;
 
 class Randomizer {
-  constructor(dimension, x) {
+  constructor(dimension, x = 0) {
     this.dimension = dimension;
-    this.x = x || 0;
+    this.x = x;
   }
 
   getVector(test) {

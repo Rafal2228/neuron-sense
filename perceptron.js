@@ -2,11 +2,11 @@ var Randomizer = require('./randomizer');
 
 class Perceptron {
 
-  constructor(dimension, learningRate) {
+  constructor(dimension, learningRate = 10) {
     this.dimension = dimension;
     this.weights = new Randomizer(dimension).getVector(true);
     this.threshold = 1;
-    this.learningRate = learningRate || 10;
+    this.learningRate = learningRate;
   }
 
   activated(vector) {
