@@ -1,3 +1,5 @@
+'use strict';
+
 var util = require('util');
 var Randomizer = require('./randomizer');
 var Perceptron = require('./perceptron');
@@ -8,7 +10,7 @@ var config = {
   dimension: 4,
   x: 41,
   acceptableError: .05,
-  perceptronLearningRate: .1
+  perceptronLearningRate: .5
 }
 
 
@@ -73,6 +75,7 @@ process.stdin.on('readable', () => {
       sum += num;
       if(vector.length == config.dimension) {
         let t = perceptron.activated(vector);
+        console.log(t)
         if(t != (sum > config.x)) {
           process.stdout.write('We failed: Expected ' + sum + (t ? ' > ' : ' <= ') + config.x + '\n');
           process.exit();

@@ -1,3 +1,5 @@
+'use strict';
+
 const NUM_LIMIT = 1000;
 
 class Randomizer {

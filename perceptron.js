@@ -1,3 +1,5 @@
+'use strict';
+
 var Randomizer = require('./randomizer');
 
 class Perceptron {
@@ -35,11 +37,14 @@ class Perceptron {
         else
           this.weights[i] -= this.learningRate * vector[i]
       }
-
+      console.log("STEP:")
+      console.log("weight: " + this.weights)
       if(vector[this.dimension])
         this.threshold -= this.learningRate;
       else
         this.threshold += this.learningRate;
+      console.log("threshold: " + this.threshold)
+
     }
   }
 }
